@@ -1,3 +1,4 @@
+// 准备erc20 的abi
 
 export const ERC20ABI = [
     // Read-Only Functions

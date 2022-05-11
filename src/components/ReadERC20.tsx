@@ -11,6 +11,7 @@ interface Props {
     addressContract: string
 }
 
+// 连续箭头函数是函数柯里化的写法
 const fetcher = (library: Web3Provider | undefined, abi: any) => (...args:any) => {
     if (!library) return
 
@@ -28,6 +29,7 @@ export default function ReadERC20(props:Props){
 
   const {  account, active, library} = useWeb3React<Web3Provider>()
 
+  // 通过swr来查询余额
   const { data: balance, mutate } = useSWR([addressContract, 'balanceOf', account], {
     fetcher: fetcher(library, abi),
   })
@@ -36,6 +38,7 @@ useEffect( () => {
     if(!(active && account && library)) return
 
     const erc20:Contract = new Contract(addressContract, abi, library);
+    // getCode先去判断是否是合约地址
     library.getCode(addressContract).then((result:string)=>{
       //check whether it is a contract
       if(result === '0x') return
@@ -44,6 +47,7 @@ useEffect( () => {
           setSymbol(result)
       }).catch('error', console.error)
 
+      // 调用erc20的方法查询totalSupply
       erc20.totalSupply().then((result:string)=>{
           setTotalSupply(formatEther(result))
       }).catch('error', console.error);

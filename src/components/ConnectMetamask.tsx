@@ -11,6 +11,7 @@ const ConnectMetamask = () => {
 
     const { chainId, account, activate,deactivate, setError, active,library ,connector} = useWeb3React<Web3Provider>()
 
+    // 连接 metaMask
     const onClickConnect = () => {
       activate(injected,(error) => {
         if (error instanceof UserRejectedRequestError) {
@@ -22,6 +23,7 @@ const ConnectMetamask = () => {
       }, false)
     }
     
+    // 断开连接 metaMask
     const onClickDisconnect = () => {
         deactivate()
       }

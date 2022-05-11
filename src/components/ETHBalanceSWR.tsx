@@ -13,6 +13,7 @@ const fetcher = (library:any) => (...args:any) => {
 const ETHBalanceSWR = () => {
     const { account, active, library,chainId} = useWeb3React<Web3Provider>()
 
+    // 使用实现数据更新
     const { data: balance,mutate } = useSWR(['getBalance', account, 'latest'], {
       fetcher: fetcher(library),
     })
@@ -22,6 +23,7 @@ const ETHBalanceSWR = () => {
       
       // listen for changes on an Ethereum address
       console.log(`listening for blocks...`)
+      // 当区块变化时触发，每个区块都会去调用一次，更新数据
       library.on('block', () => {
         console.log('update balance...')
         mutate(undefined, true)

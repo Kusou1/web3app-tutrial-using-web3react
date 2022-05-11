@@ -17,6 +17,7 @@ export default function TransferERC20(props:Props){
 
   const { account, active, library} = useWeb3React<Web3Provider>()
 
+  // 转账
   async function transfer(event:React.FormEvent) {
     event.preventDefault()
     if(!(active && account && library)) return

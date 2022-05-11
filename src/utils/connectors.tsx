@@ -1,5 +1,7 @@
 import { InjectedConnector } from "@web3-react/injected-connector";
 
+
+// 设置支持的链
 export const injected = new InjectedConnector({
     supportedChainIds: [
         1, 

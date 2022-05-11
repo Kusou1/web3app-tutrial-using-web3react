@@ -10,6 +10,7 @@ const ETHBalance = () => {
     const provider = library
       
     useEffect(() => {
+      // 通过useWeb3React的hook拿到一系列的状态
       if(active && account){
         provider?.getBalance(account).then((result)=>{
             setEthBalance(Number(formatEther(result)))
